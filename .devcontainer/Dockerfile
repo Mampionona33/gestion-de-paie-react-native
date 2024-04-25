@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/base:ubuntu-22.04
+FROM ubuntu:22.04
 
 # Installer htop, nodejs et snapd
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
