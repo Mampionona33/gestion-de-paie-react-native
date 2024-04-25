@@ -12,7 +12,7 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
       <Text>Login screen</Text>
       <Button
         title="List employés"
-        onPress={() => navigation.navigate("ListEmployeScreen")}
+        onPress={() => navigation.navigate("List employés")}
       />
       <StatusBar style="auto" />
     </View>
