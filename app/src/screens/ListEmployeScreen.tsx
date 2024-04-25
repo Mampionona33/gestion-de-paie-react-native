@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 
-export default function ListEmployeScreen() {
+export default function ListEmployeScreen(): JSX.Element {
   return (
     <View style={styles.container}>
       <Text>List employées</Text>
