@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/devcontainers/base:ubuntu-22.04
 
 # Installer htop, nodejs et snapd
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends htop nodejs snapd git wget curl
+    && apt-get -y install --no-install-recommends htop nodejs snapd git wget curl yarn
 
 # install node
 ENV NVM_DIR /usr/local/nvm
