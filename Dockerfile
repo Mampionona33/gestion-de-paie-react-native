@@ -30,7 +30,7 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
 RUN export JAVA_HOME
 
 # Copier le dossier "app" dans le conteneur
-# COPY app /app
+COPY app /app
 
 # Définir le répertoire de travail comme étant /app
-# WORKDIR /app
+WORKDIR /app
