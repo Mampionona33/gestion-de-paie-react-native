@@ -13,6 +13,8 @@ import {
   KeyboardAvoidingView,
   ScrollView,
 } from "react-native";
+import authService, { ILogin } from "../services/auth.service";
+import { useQuery } from "react-query";
 
 // Importez le logo
 const logo = require("../../assets/images/logo.png");
@@ -27,30 +29,62 @@ type LoginScreenProps = {
 };
 
 export default function LoginScreen({ navigation }: LoginScreenProps) {
+  const [state, setState] = React.useState<ILogin>({ email: "", password: "" });
+  const [submit, setSubmit] = React.useState<boolean>(false);
+
+  const { isLoading, data, error, isError } = useQuery(
+    "login",
+    () => authService.login(state),
+    {
+      enabled: submit,
+      onSuccess: (data: any) => {
+        console.log(data);
+      },
+    }
+  );
+
+  if (isError) {
+    console.log("error", error);
+  }
+
+  const handleSubmit = () => {
+    if (state.email === "" || state.password === "") {
+      return alert("Veuillez remplir tous les champs");
+    }
+    setSubmit(true);
+    // navigation.navigate(SCREEN_NAMES.LIST_EMPLOYEES)
+  };
+
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.logoContainer}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate(SCREEN_NAMES.LIST_EMPLOYEES)}
-          >
+          <TouchableOpacity>
             <Image source={logo} style={styles.logo} />
           </TouchableOpacity>
         </View>
         <View style={styles.form}>
           <View style={styles.inputContainer}>
             <Text style={styles.label}>Email</Text>
-            <TextInput placeholder="Email" style={styles.input} />
+            <TextInput
+              placeholder="Email"
+              style={styles.input}
+              value={state.email}
+              onChangeText={(e) => setState({ ...state, email: e })}
+            />
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.label}>Mot de passe</Text>
-            <TextInput placeholder="Mot de passe" style={styles.input} />
+            <TextInput
+              placeholder="Mot de passe"
+              style={styles.input}
+              value={state.password}
+              secureTextEntry={true}
+              onChangeText={(e) => setState({ ...state, password: e })}
+            />
           </View>
           <View style={styles.buttonContainer}>
-            <Button
-              title="List employés"
-              onPress={() => navigation.navigate(SCREEN_NAMES.LIST_EMPLOYEES)}
-            />
+            <Button title="Login" onPress={handleSubmit} />
           </View>
         </View>
       </ScrollView>
