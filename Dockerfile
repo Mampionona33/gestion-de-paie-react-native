@@ -30,7 +30,7 @@ ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
 RUN export JAVA_HOME
 
 # Copier le dossier "app" dans le conteneur
-COPY app /app
+COPY . .
 
 # Définir le répertoire de travail comme étant /app
 WORKDIR /app
@@ -39,4 +39,5 @@ WORKDIR /app
 RUN  npm i -g ts-node  && npm install -g typescript@latest && npm install -g eas-cli
 
 # Configure git
-RUN git config --global user.email "ramamps33@gmail.com" && git config --global user.name "Mampionona33" && git config --global user.password "mampi4806"
+# RUN git config --global user.email "ramamps33@gmail.com" && git config --global user.name "Mampionona33" && git config --global user.password "mampi4806"
+RUN git config --global --add safe.directory /app
