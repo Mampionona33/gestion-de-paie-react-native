@@ -7,15 +7,16 @@ export interface ILogin {
 
 class AuthServices {
   private REACT_APP_API_BASE_URL: string | undefined;
-
   constructor() {
-    this.REACT_APP_API_BASE_URL =
-      process.env.REACT_APP_API_BASE_URL || "http://localhost:8080";
+    this.REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
   }
 
   async login({ email, password }: ILogin) {
     try {
-      console.log("REACT_APP_API_BASE_URL", this.REACT_APP_API_BASE_URL);
+      if (!this.REACT_APP_API_BASE_URL) {
+        throw new Error("this.REACT_APP_API_BASE_URL is not defined");
+      }
+
       const response = await axios.post(
         `${this.REACT_APP_API_BASE_URL}/login`,
         {
