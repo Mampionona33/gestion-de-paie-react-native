@@ -7,7 +7,7 @@
     "Run server": {
       "name": "Install dependencies",
       "command": "cd app/ && yarn",
-      "runAtStart": true
+      "runAtStart": false
     }
   }
 }
