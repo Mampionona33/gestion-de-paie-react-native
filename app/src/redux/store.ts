@@ -1,7 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
+import notificationReducer from "./notification/notificationReducer";
 
-const rootReducer = combineReducers({});
+const rootReducer = combineReducers({
+  notifications: notificationReducer,
+});
 
 const configStore = configureStore({
   reducer: rootReducer,

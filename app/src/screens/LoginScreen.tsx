@@ -40,12 +40,14 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
       if (data) console.log(data);
       if (data === "Connecté") {
         navigation.navigate(SCREEN_NAMES.LIST_EMPLOYEES);
-        setSubmit(false);
+      } else {
+        setState({ email: "", password: "" });
       }
+      setSubmit(false);
     },
     onError: (error: AxiosError) => {
-      console.log("Login screen error", error);
       setSubmit(false);
+      setState({ email: "", password: "" });
     },
   });
 

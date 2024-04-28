@@ -1,11 +1,17 @@
 import { useEffect } from "react";
 import axios from "axios";
+import { useToast } from "react-native-toast-notifications";
+import { useAppDispatch } from "../hooks/useReduxHooks";
+import { setNotification } from "../redux/notification/notificationReducer";
 
 interface IAxiosErrorHandlerProps {
   children: JSX.Element;
 }
 
 const AxiosErrorHandler = ({ children }: IAxiosErrorHandlerProps) => {
+  //   const toast = useToast();
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
     // Request interceptor
     const requestInterceptor = axios.interceptors.request.use((request) => {
@@ -25,12 +31,21 @@ const AxiosErrorHandler = ({ children }: IAxiosErrorHandlerProps) => {
         if (error.response?.status) {
           switch (error.response.status) {
             case 401:
-              // Handle Unauthenticated here
-              console.log("Unauthenticated from Axios", error);
+              dispatch(
+                setNotification({
+                  message: "Mot de passe ou email incorrect",
+                  type: "danger",
+                })
+              );
+
               break;
             case 403:
               // Handle Unauthorized here
               console.log("Forbidden from Axios", error);
+              setNotification({
+                message: "Vous devez vous connecter",
+                type: "danger",
+              });
             case 404:
               // Handle Not found here
               console.log("Not found from Axios", error);
@@ -45,9 +60,15 @@ const AxiosErrorHandler = ({ children }: IAxiosErrorHandlerProps) => {
             case "ERR_NETWORK":
               console.log("Erreur reseau", error);
             case "ETIMEDOUT":
-              console.log("Timeout", error);
+              setNotification({
+                message: "Impossible de joindre le serveur",
+                type: "danger",
+              });
             case "ECONNABORTED":
-              console.log("Abort", error);
+              setNotification({
+                message: "Impossible de joindre le serveur",
+                type: "danger",
+              });
             default:
               break;
           }
