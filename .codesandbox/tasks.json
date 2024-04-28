@@ -6,7 +6,7 @@
   "tasks": {
     "Run server": {
       "name": "Run server",
-      "command": "cd app && yarn install && npm start",
+      "command": "cd app && yarn && npm start",
       "runAtStart": true
     }
   }
