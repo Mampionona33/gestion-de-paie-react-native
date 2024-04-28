@@ -36,4 +36,4 @@ COPY app /app
 WORKDIR /app
 
 # Install eas-cli using npm
-RUN npm install -g eas-cli
+RUN  npm i -g ts-node  && npm install -g typescript@latest && npm install -g eas-cli
