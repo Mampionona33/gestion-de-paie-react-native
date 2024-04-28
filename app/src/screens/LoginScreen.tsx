@@ -12,6 +12,7 @@ import {
   SafeAreaView,
   KeyboardAvoidingView,
   ScrollView,
+  ActivityIndicator,
 } from "react-native";
 import authService, { ILogin } from "../services/auth.service";
 import { useQuery } from "react-query";
@@ -33,7 +34,7 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
   const [state, setState] = React.useState<ILogin>({ email: "", password: "" });
   const [submit, setSubmit] = React.useState<boolean>(false);
 
-  const { isLoading } = useQuery("login", () => authService.login(state), {
+  const { isFetching } = useQuery("login", () => authService.login(state), {
     enabled: submit,
     onSuccess: (data: any) => {
       if (data) console.log(data);
@@ -55,6 +56,19 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
     setSubmit(true);
   };
 
+  const handleInputChange = (name: string, value: string) => {
+    setSubmit(false);
+    setState({ ...state, [name]: value });
+  };
+
+  if (isFetching) {
+    return (
+      <View style={styles.activityIndicator}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
+
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       <ScrollView contentContainerStyle={styles.scrollContainer}>
@@ -70,7 +84,7 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
               placeholder="Email"
               style={styles.input}
               value={state.email}
-              onChangeText={(e) => setState({ ...state, email: e })}
+              onChangeText={(value) => handleInputChange("email", value)}
             />
           </View>
           <View style={styles.inputContainer}>
@@ -80,7 +94,7 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
               style={styles.input}
               value={state.password}
               secureTextEntry={true}
-              onChangeText={(e) => setState({ ...state, password: e })}
+              onChangeText={(value) => handleInputChange("password", value)}
             />
           </View>
           <View style={styles.buttonContainer}>
@@ -97,6 +111,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+  },
+  activityIndicator: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   scrollContainer: {
     flexGrow: 1,
