@@ -29,6 +29,11 @@ RUN apt-get update && \
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
 RUN export JAVA_HOME
 
+
+# Install eas-cli using yarn
+RUN npm install -g eas-cli 
+
+
 # Copier le dossier "app" dans le conteneur
 # COPY app /app
 
