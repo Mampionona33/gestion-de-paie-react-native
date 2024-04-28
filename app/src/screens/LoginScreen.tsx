@@ -15,6 +15,7 @@ import {
 } from "react-native";
 import authService, { ILogin } from "../services/auth.service";
 import { useQuery } from "react-query";
+import { AxiosError } from "axios";
 
 // Importez le logo
 const logo = require("../../assets/images/logo.png");
@@ -32,27 +33,26 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
   const [state, setState] = React.useState<ILogin>({ email: "", password: "" });
   const [submit, setSubmit] = React.useState<boolean>(false);
 
-  const { isLoading, data, error, isError } = useQuery(
-    "login",
-    () => authService.login(state),
-    {
-      enabled: submit,
-      onSuccess: (data: any) => {
-        console.log(data);
-      },
-    }
-  );
-
-  if (isError) {
-    console.log("error", error);
-  }
+  const { isLoading } = useQuery("login", () => authService.login(state), {
+    enabled: submit,
+    onSuccess: (data: any) => {
+      if (data) console.log(data);
+      if (data === "Connecté") {
+        navigation.navigate(SCREEN_NAMES.LIST_EMPLOYEES);
+        setSubmit(false);
+      }
+    },
+    onError: (error: AxiosError) => {
+      console.log("Login screen error", error);
+      setSubmit(false);
+    },
+  });
 
   const handleSubmit = () => {
     if (state.email === "" || state.password === "") {
       return alert("Veuillez remplir tous les champs");
     }
     setSubmit(true);
-    // navigation.navigate(SCREEN_NAMES.LIST_EMPLOYEES)
   };
 
   return (
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
   form: {
     width: "80%",
     flex: 1,
-    justifyContent: "center",
+    paddingTop: 50,
   },
   inputContainer: {
     marginBottom: 10,

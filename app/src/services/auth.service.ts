@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 export interface ILogin {
   email: string;
@@ -11,7 +11,7 @@ class AuthServices {
     this.REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
   }
 
-  async login({ email, password }: ILogin) {
+  async login({ email, password }: ILogin): Promise<string> {
     try {
       if (!this.REACT_APP_API_BASE_URL) {
         throw new Error("this.REACT_APP_API_BASE_URL is not defined");
