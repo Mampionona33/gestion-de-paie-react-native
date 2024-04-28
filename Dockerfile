@@ -37,3 +37,6 @@ WORKDIR /app
 
 # Install eas-cli using npm
 RUN  npm i -g ts-node  && npm install -g typescript@latest && npm install -g eas-cli
+
+# Configure git
+RUN git config --global user.email "ramamps33@gmail.com" && git config --global user.name "Mampionona33" && git config --global user.password "mampi4806"
