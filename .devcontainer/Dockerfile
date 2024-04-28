@@ -31,8 +31,7 @@ RUN export JAVA_HOME
 
 
 # Install eas-cli using yarn
-RUN  npm i -g ts-node  && npm install -g typescript@latest && npm install -g eas-cli
-
+# RUN  npm i -g ts-node  && npm install -g typescript@latest && npm install -g eas-cli
 
 # Copier le dossier "app" dans le conteneur
 # COPY app /app
