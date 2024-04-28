@@ -5,8 +5,8 @@
   // These tasks can be run from CodeSandbox. Running one will open a log in the app.
   "tasks": {
     "Run server": {
-      "name": "Run server",
-      "command": "cd app && yarn && npm start",
+      "name": "Install dependencies",
+      "command": "cd app && yarn",
       "runAtStart": true
     }
   }
