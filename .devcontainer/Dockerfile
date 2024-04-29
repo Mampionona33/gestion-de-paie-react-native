@@ -41,3 +41,6 @@ RUN  npm i -g ts-node  && npm install -g typescript@latest && npm install -g eas
 
 # Définir le répertoire de travail comme étant /app
 WORKDIR /app
+
+# setup env 
+ENV REACT_APP_API_BASE_URL=https://la-ligne-scandinave-api.vercel.app
