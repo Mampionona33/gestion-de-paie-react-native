@@ -36,8 +36,13 @@ COPY . .
 WORKDIR /app
 
 # Install eas-cli using npm
-RUN  npm i -g ts-node  && npm install -g typescript@latest && npm install -g eas-cli
+RUN  npm i -g ts-node  && npm install -g typescript@latest && npm install -g eas-cli && npm install --global yarn
 
 # Configure git
 # RUN git config --global user.email "ramamps33@gmail.com" && git config --global user.name "Mampionona33" && git config --global user.password "mampi4806"
 RUN git config --global --add safe.directory /app
+
+# setup env
+ENV REACT_APP_API_BASE_URL=https://la-ligne-scandinave-api.vercel.app
+ENV REACT_APP_API_LOGIN=lslisteemployes
+ENV REACT_APP_API_PASSWORD="20lsliste23"
