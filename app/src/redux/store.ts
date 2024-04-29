@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
 import notificationReducer from "./notification/notificationReducer";
+import authReducer from "./auth/authReducer";
 
 const rootReducer = combineReducers({
   notifications: notificationReducer,
+  auth: authReducer,
 });
 
 const configStore = configureStore({

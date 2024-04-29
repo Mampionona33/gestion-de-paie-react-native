@@ -10,7 +10,7 @@ const initialState: INotification = {
 };
 
 const notificationReducer = createSlice({
-  name: "axiosError",
+  name: "notification",
   initialState,
   reducers: {
     setNotification(state, action: { payload: INotification }) {

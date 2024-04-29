@@ -17,6 +17,8 @@ import {
 import authService, { ILogin } from "../services/auth.service";
 import { useQuery } from "react-query";
 import { AxiosError } from "axios";
+import { useAppDispatch, useAppSelector } from "../hooks/useReduxHooks";
+import { login } from "../redux/auth/authReducer";
 
 // Importez le logo
 const logo = require("../../assets/images/logo.png");
@@ -33,13 +35,20 @@ type LoginScreenProps = {
 export default function LoginScreen({ navigation }: LoginScreenProps) {
   const [state, setState] = React.useState<ILogin>({ email: "", password: "" });
   const [submit, setSubmit] = React.useState<boolean>(false);
+  const { isAuthenticated } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
+
+  React.useEffect(() => {
+    if (isAuthenticated) {
+      navigation.navigate(SCREEN_NAMES.LIST_EMPLOYEES);
+    }
+  }, [isAuthenticated]);
 
   const { isFetching } = useQuery("login", () => authService.login(state), {
     enabled: submit,
     onSuccess: (data: any) => {
-      if (data) console.log(data);
       if (data === "Connecté") {
-        navigation.navigate(SCREEN_NAMES.LIST_EMPLOYEES);
+        dispatch(login());
       } else {
         setState({ email: "", password: "" });
       }
