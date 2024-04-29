@@ -40,6 +40,7 @@ export default function LoginScreen({ navigation }: LoginScreenProps) {
 
   React.useEffect(() => {
     if (isAuthenticated) {
+      console.log("isAuthenticated", isAuthenticated);
       navigation.navigate(SCREEN_NAMES.LIST_EMPLOYEES);
     }
   }, [isAuthenticated]);

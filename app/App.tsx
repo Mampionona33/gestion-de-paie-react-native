@@ -5,6 +5,7 @@ import ErrorBoundary from "react-native-error-boundary";
 import ErrorFallback from "./src/errors/ErrorFallback";
 import AxiosErrorHandler from "./src/errors/AxiosErrorHandler";
 import { useAppDispatch, useAppSelector } from "./src/hooks/useReduxHooks";
+import { PaperProvider } from "react-native-paper";
 import { Provider } from "react-redux";
 import { store } from "./src/redux/store";
 import Toast, {
@@ -19,13 +20,15 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
-        <ToastProvider>
-          <AxiosErrorHandler>
-            <ErrorBoundary FallbackComponent={ErrorFallback}>
-              <AppWithToast />
-            </ErrorBoundary>
-          </AxiosErrorHandler>
-        </ToastProvider>
+        <PaperProvider>
+          <ToastProvider>
+            <AxiosErrorHandler>
+              <ErrorBoundary FallbackComponent={ErrorFallback}>
+                <AppWithToast />
+              </ErrorBoundary>
+            </AxiosErrorHandler>
+          </ToastProvider>
+        </PaperProvider>
       </Provider>
     </QueryClientProvider>
   );

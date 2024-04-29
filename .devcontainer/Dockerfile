@@ -44,3 +44,5 @@ WORKDIR /app
 
 # setup env 
 ENV REACT_APP_API_BASE_URL=https://la-ligne-scandinave-api.vercel.app
+ENV REACT_APP_API_LOGIN=lslisteemployes
+ENV REACT_APP_API_PASSWORD=20lsliste23
