@@ -2,7 +2,7 @@ FROM ubuntu:22.04
 
 # Installer htop, nodejs et snapd
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends htop nodejs snapd git wget curl yarn
+    && apt-get -y install --no-install-recommends htop nodejs snapd git wget curl
 
 # install node
 ENV NVM_DIR /usr/local/nvm
@@ -33,8 +33,8 @@ RUN export JAVA_HOME
 # Copier le dossier "app" dans le conteneur
 COPY . .
 
-# Install eas-cli using yarn
-RUN  npm i -g ts-node  && npm install -g typescript@latest && npm install -g eas-cli
+# Install eas-cli using npm
+RUN  npm i -g ts-node  && npm install -g typescript@latest && npm install -g eas-cli && npm install --global yarn
 
 # Copier le dossier "app" dans le conteneur
 # COPY app /app
