@@ -75,7 +75,6 @@ export default function ListEmployeScreen(): JSX.Element {
           </>
         )}
       </DataTable>
-      <Text>{data && data.length}</Text>
     </SafeAreaView>
   );
 }
