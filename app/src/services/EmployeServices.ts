@@ -28,7 +28,7 @@ class EmployeServices {
       ).toString("base64");
 
       const response = await axios.get(
-        `${this.REACT_APP_API_BASE_URL}/personnel`,
+        `${this.REACT_APP_API_BASE_URL}/personnels`,
         {
           headers: {
             Authorization: `Basic ${encodedCredentials}`,
