@@ -40,14 +40,13 @@ const AxiosErrorHandler = ({ children }: IAxiosErrorHandlerProps) => {
 
               break;
             case 403:
-              // Handle Unauthorized here
-              console.log("Forbidden from Axios", error);
               dispatch(
                 setNotification({
                   message: "Vous devez vous connecter",
                   type: "danger",
                 }),
               );
+              break;
             case 404:
               dispatch(
                 setNotification({
@@ -55,16 +54,22 @@ const AxiosErrorHandler = ({ children }: IAxiosErrorHandlerProps) => {
                   type: "danger",
                 }),
               );
+              break;
             case 500:
               console.log("Server error from Axios", error);
-              // Handle Server error here
+              dispatch(
+                setNotification({ message: "Erreur serveur", type: "danger" }),
+              );
               break;
             // ... And so on
           }
         } else {
           switch (error.code) {
             case "ERR_NETWORK":
-              console.log("Erreur reseau", error);
+              dispatch(
+                setNotification({ message: "Erreur reséaux", type: "danger" }),
+              );
+              break;
             case "ETIMEDOUT":
               dispatch(
                 setNotification({
@@ -72,6 +77,7 @@ const AxiosErrorHandler = ({ children }: IAxiosErrorHandlerProps) => {
                   type: "danger",
                 }),
               );
+              break;
             case "ECONNABORTED":
               dispatch(
                 setNotification({
@@ -79,6 +85,7 @@ const AxiosErrorHandler = ({ children }: IAxiosErrorHandlerProps) => {
                   type: "danger",
                 }),
               );
+              break;
             default:
               break;
           }
