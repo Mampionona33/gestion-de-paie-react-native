@@ -59,7 +59,6 @@ export default function ListEmployeScreen(): JSX.Element {
               </DataTable.Cell>
             </DataTable.Row>
           ))}
-        {data && data.length === 0 && <Text>Aucun employé</Text>}
         {data && data.length > 0 && (
           <>
             <DataTable.Pagination
