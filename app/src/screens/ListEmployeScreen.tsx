@@ -3,7 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { useQuery } from "react-query";
 import employeService from "../services/EmployeServices";
-import { ActivityIndicator } from "react-native-paper";
+import { ActivityIndicator, Card } from "react-native-paper";
 import { DataTable } from "react-native-paper";
 
 export default function ListEmployeScreen(): JSX.Element {
@@ -13,7 +13,7 @@ export default function ListEmployeScreen(): JSX.Element {
   const [page, setPage] = React.useState<number>(0);
   const [numberOfItemsPerPageList] = React.useState([5, 8, 10]);
   const [itemsPerPage, onItemsPerPageChange] = React.useState(
-    numberOfItemsPerPageList[0],
+    numberOfItemsPerPageList[0]
   );
 
   React.useEffect(() => {
@@ -39,7 +39,11 @@ export default function ListEmployeScreen(): JSX.Element {
       {data &&
         data.slice(from, to).map((item: any) => (
           <DataTable.Row key={item.key}>
-            <DataTable.Cell>{item.nom}</DataTable.Cell>
+            <DataTable.Cell>
+              <Card>
+                <Card.Content>{item.nom}</Card.Content>
+              </Card>
+            </DataTable.Cell>
           </DataTable.Row>
         ))}
       {data && data.length === 0 && <Text>Aucun employé</Text>}
@@ -68,5 +72,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+    gap: 20,
   },
 });
