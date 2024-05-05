@@ -35,46 +35,63 @@ const AxiosErrorHandler = ({ children }: IAxiosErrorHandlerProps) => {
                 setNotification({
                   message: "Mot de passe ou email incorrect",
                   type: "danger",
-                })
+                }),
               );
 
               break;
             case 403:
-              // Handle Unauthorized here
-              console.log("Forbidden from Axios", error);
-              setNotification({
-                message: "Vous devez vous connecter",
-                type: "danger",
-              });
+              dispatch(
+                setNotification({
+                  message: "Vous devez vous connecter",
+                  type: "danger",
+                }),
+              );
+              break;
             case 404:
-              // Handle Not found here
-              console.log("Not found from Axios", error);
+              dispatch(
+                setNotification({
+                  message: "Page introuvable",
+                  type: "danger",
+                }),
+              );
+              break;
             case 500:
               console.log("Server error from Axios", error);
-              // Handle Server error here
+              dispatch(
+                setNotification({ message: "Erreur serveur", type: "danger" }),
+              );
               break;
             // ... And so on
           }
         } else {
           switch (error.code) {
             case "ERR_NETWORK":
-              console.log("Erreur reseau", error);
+              dispatch(
+                setNotification({ message: "Erreur reséaux", type: "danger" }),
+              );
+              break;
             case "ETIMEDOUT":
-              setNotification({
-                message: "Impossible de joindre le serveur",
-                type: "danger",
-              });
+              dispatch(
+                setNotification({
+                  message: "Impossible de joindre le serveur",
+                  type: "danger",
+                }),
+              );
+              break;
             case "ECONNABORTED":
-              setNotification({
-                message: "Impossible de joindre le serveur",
-                type: "danger",
-              });
+              dispatch(
+                setNotification({
+                  message: "Impossible de joindre le serveur",
+                  type: "danger",
+                }),
+              );
+              break;
             default:
               break;
           }
         }
         return error;
-      }
+      },
     );
 
     return () => {

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Buffer } from "buffer";
 
 class EmployeServices {
   private REACT_APP_API_BASE_URL: string | undefined;
@@ -8,6 +9,7 @@ class EmployeServices {
   constructor() {}
 
   async getAll() {
+    console.log("run getAll");
     this.REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
     this.REACT_APP_API_LOGIN = process.env.REACT_APP_API_LOGIN;
     this.REACT_APP_API_PASSWORD = process.env.REACT_APP_API_PASSWORD;
@@ -21,15 +23,19 @@ class EmployeServices {
         throw new Error("Missing environment variables in EmployeServices");
       }
 
+      const encodedCredentials = Buffer.from(
+        `${this.REACT_APP_API_LOGIN}:${this.REACT_APP_API_PASSWORD}`,
+      ).toString("base64");
+
       const response = await axios.get(
         `${this.REACT_APP_API_BASE_URL}/personnels`,
         {
-          auth: {
-            username: this.REACT_APP_API_LOGIN,
-            password: this.REACT_APP_API_PASSWORD,
+          headers: {
+            Authorization: `Basic ${encodedCredentials}`,
           },
-        }
+        },
       );
+      console.log("response from getAll", response);
       return response.data;
     } catch (error) {
       throw error;
