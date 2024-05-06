@@ -26,7 +26,7 @@ export default function ListEmployeScreen(): JSX.Element {
   );
   const dispatch = useAppDispatch();
   const [page, setPage] = React.useState<number>(0);
-  const [numberOfItemsPerPageList] = React.useState([3, 4, 5]);
+  const [numberOfItemsPerPageList] = React.useState([3, 4, 5, 10, 15, 20, 50]);
   const [searchQuery, setSearchQuery] = React.useState<string>("");
   const [isKeyboardVisible, setKeyboardVisible] =
     React.useState<boolean>(false);
@@ -79,6 +79,7 @@ export default function ListEmployeScreen(): JSX.Element {
   return (
     <SafeAreaView style={styles.container}>
       <Searchbar
+        style={styles.searchBar}
         placeholder="Rechercher"
         value={searchQuery}
         onChangeText={setSearchQuery}
@@ -145,20 +146,21 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
   },
+  searchBar: {
+    marginBottom: 10,
+    marginHorizontal: 10,
+  },
   tableContainer: {
     flex: 1,
   },
   paginationContainer: {
-    marginBottom: 20,
+    marginBottom: 0,
   },
   pagination: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 20,
-    marginTop: 20,
     flexDirection: "row",
-    paddingHorizontal: 10,
   },
   dataTableHead: {
     display: "flex",

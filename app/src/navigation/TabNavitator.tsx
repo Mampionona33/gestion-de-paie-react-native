@@ -14,9 +14,9 @@ export default function TabNavitator() {
       }}
     >
       <Tab.Screen
-        name="Listemployés"
+        name="ListEmployeScreen"
         component={ListEmployeScreen}
-        options={{ title: "List Employe" }}
+        options={{ title: "List Employé" }}
       />
       <Tab.Screen
         name="MenuScreen"
