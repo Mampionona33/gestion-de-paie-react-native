@@ -1,5 +1,12 @@
 import * as React from "react";
-import { Keyboard, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import {
+  Keyboard,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+} from "react-native";
 import { useQuery } from "react-query";
 import employeService from "../services/EmployeServices";
 import {
@@ -15,7 +22,7 @@ import { setNotification } from "../redux/notification/notificationReducer";
 export default function ListEmployeScreen(): JSX.Element {
   const { data, isFetching, isError, error } = useQuery(
     "listEmploye",
-    async () => await employeService.getAll()
+    async () => await employeService.getAll(),
   );
   const dispatch = useAppDispatch();
   const [page, setPage] = React.useState<number>(0);
@@ -24,7 +31,7 @@ export default function ListEmployeScreen(): JSX.Element {
   const [isKeyboardVisible, setKeyboardVisible] =
     React.useState<boolean>(false);
   const [itemsPerPage, onItemsPerPageChange] = React.useState(
-    numberOfItemsPerPageList[0]
+    numberOfItemsPerPageList[0],
   );
 
   React.useEffect(() => {
@@ -33,14 +40,14 @@ export default function ListEmployeScreen(): JSX.Element {
       "keyboardDidShow",
       () => {
         setKeyboardVisible(true);
-      }
+      },
     );
 
     const keyboardDidHideListener = Keyboard.addListener(
       "keyboardDidHide",
       () => {
         setKeyboardVisible(false);
-      }
+      },
     );
 
     return () => {
@@ -51,7 +58,7 @@ export default function ListEmployeScreen(): JSX.Element {
 
   if (isError) {
     dispatch(
-      setNotification({ message: (error as Error).message, type: "error" })
+      setNotification({ message: (error as Error).message, type: "error" }),
     );
   }
   if (isFetching) {
@@ -76,29 +83,31 @@ export default function ListEmployeScreen(): JSX.Element {
         value={searchQuery}
         onChangeText={setSearchQuery}
       />
-      <View style={styles.tableContainer}>
-        <DataTable>
-          <DataTable.Header style={styles.dataTableHead}>
-            <DataTable.Title>Nom et prénom</DataTable.Title>
-            <DataTable.Title>Matricule</DataTable.Title>
-          </DataTable.Header>
-          {data &&
-            data.slice(from, to).map((item: any) => (
-              <DataTable.Row key={item.id} style={styles.row}>
-                <DataTable.Cell>
-                  <Card style={styles.card}>
-                    <Card.Content style={styles.cardContent}>
-                      <Text style={styles.cardText}>
-                        {item.nom} {item.prenom}
-                      </Text>
-                      <Text style={styles.cardText}>{item.matricule}</Text>
-                    </Card.Content>
-                  </Card>
-                </DataTable.Cell>
-              </DataTable.Row>
-            ))}
-        </DataTable>
-      </View>
+      <ScrollView>
+        <View style={styles.tableContainer}>
+          <DataTable>
+            <DataTable.Header style={styles.dataTableHead}>
+              <DataTable.Title>Nom et prénom</DataTable.Title>
+              <DataTable.Title>Matricule</DataTable.Title>
+            </DataTable.Header>
+            {data &&
+              data.slice(from, to).map((item: any) => (
+                <DataTable.Row key={item.id} style={styles.row}>
+                  <DataTable.Cell>
+                    <Card style={styles.card}>
+                      <Card.Content style={styles.cardContent}>
+                        <Text style={styles.cardText}>
+                          {item.nom} {item.prenom}
+                        </Text>
+                        <Text style={styles.cardText}>{item.matricule}</Text>
+                      </Card.Content>
+                    </Card>
+                  </DataTable.Cell>
+                </DataTable.Row>
+              ))}
+          </DataTable>
+        </View>
+      </ScrollView>
       {!isKeyboardVisible && (
         <View style={styles.iconAddContainer}>
           <IconButton
