@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
   },
   row: {
     borderWidth: 0,
-    paddingVertical: 30,
+    paddingVertical: 20,
     height: "auto",
     flex: 1,
   },
