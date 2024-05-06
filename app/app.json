@@ -1,0 +1,17 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "ff57dd19-2ca0-4e44-baf1-1b9c9455426e"
+      }
+    },
+    "owner": "mampionona33",
+    "slug": "gestion-de-paie",
+    "android": {
+      "package": "com.mampionona33.gestiondepaie"
+    },
+    "ios": {
+      "bundleIdentifier": "com.mampionona33.gestiondepaie"
+    }
+  }
+}
