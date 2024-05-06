@@ -122,6 +122,7 @@ export default function ListEmployeScreen(): JSX.Element {
         <View style={styles.paginationContainer}>
           {data && data.length > 0 && (
             <DataTable.Pagination
+              style={styles.pagination}
               page={page}
               numberOfPages={Math.ceil(data.length / itemsPerPage)}
               onPageChange={(page) => setPage(page)}
@@ -149,6 +150,15 @@ const styles = StyleSheet.create({
   },
   paginationContainer: {
     marginBottom: 20,
+  },
+  pagination: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 20,
+    marginTop: 20,
+    flexDirection: "row",
+    paddingHorizontal: 10,
   },
   dataTableHead: {
     display: "flex",
