@@ -5,12 +5,32 @@
   "build": {
     "development": {
       "developmentClient": true,
-      "distribution": "internal"
+      "distribution": "internal",
+      "android": {
+        "image": "latest"
+      },
+      "env": {
+        "REACT_APP_API_BASE_URL": "https://la-ligne-scandinave-api.vercel.app",
+        "REACT_APP_API_LOGIN": "lslisteemployes",
+        "REACT_APP_API_PASSWORD": "20lsliste23"
+      }
     },
     "preview": {
-      "distribution": "internal"
+      "distribution": "internal",
+      "android": {
+        "image": "latest"
+      },
+      "env": {
+        "REACT_APP_API_BASE_URL": "https://la-ligne-scandinave-api.vercel.app",
+        "REACT_APP_API_LOGIN": "lslisteemployes",
+        "REACT_APP_API_PASSWORD": "20lsliste23"
+      }
     },
     "production": {
+      "distribution": "internal",
+      "android": {
+        "image": "latest"
+      },
       "env": {
         "REACT_APP_API_BASE_URL": "https://la-ligne-scandinave-api.vercel.app",
         "REACT_APP_API_LOGIN": "lslisteemployes",
