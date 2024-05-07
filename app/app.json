@@ -5,8 +5,11 @@
         "projectId": "ff57dd19-2ca0-4e44-baf1-1b9c9455426e"
       }
     },
+    "name": "Gestion de paie",
     "owner": "mampionona33",
+    "description": "Gestion de paie",
     "slug": "gestion-de-paie",
+    "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "backgroundColor": "#ffffff"
