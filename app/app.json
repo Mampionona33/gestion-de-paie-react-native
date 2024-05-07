@@ -7,6 +7,10 @@
     },
     "owner": "mampionona33",
     "slug": "gestion-de-paie",
+    "splash": {
+      "image": "./assets/splash.png",
+      "backgroundColor": "#ffffff"
+    },
     "android": {
       "package": "com.mampionona33.gestiondepaie"
     },
