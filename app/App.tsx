@@ -60,7 +60,7 @@ const AppWithToast = () => {
         dispatch(resetNotification());
       }, 3000);
     }
-  }, [message, toast]);
+  }, [message, toast, type, dispatch]);
 
   return <AppNavigator />;
 };
