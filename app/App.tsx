@@ -7,12 +7,12 @@ import AxiosErrorHandler from "./src/errors/AxiosErrorHandler";
 import { useAppDispatch, useAppSelector } from "./src/hooks/useReduxHooks";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 import { Provider } from "react-redux";
+import { store } from "./src/redux/store";
 import Toast, {
   ToastProvider,
   useToast,
 } from "react-native-toast-notifications";
 import { resetNotification } from "./src/redux/notification/notificationReducer";
-import { store } from "./src/redux/store";
 
 const queryClient = new QueryClient();
 
@@ -30,11 +30,13 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
         <PaperProvider theme={theme}>
-          <AxiosErrorHandler>
-            <ErrorBoundary FallbackComponent={ErrorFallback}>
-              <AppWithToast />
-            </ErrorBoundary>
-          </AxiosErrorHandler>
+          <ToastProvider>
+            <AxiosErrorHandler>
+              <ErrorBoundary FallbackComponent={ErrorFallback}>
+                <AppWithToast />
+              </ErrorBoundary>
+            </AxiosErrorHandler>
+          </ToastProvider>
         </PaperProvider>
       </Provider>
     </QueryClientProvider>
@@ -42,14 +44,6 @@ function App() {
 }
 
 const AppWithToast = () => {
-  return (
-    <ToastProvider>
-      <InnerAppWithToast />
-    </ToastProvider>
-  );
-};
-
-const InnerAppWithToast = () => {
   const toast = useToast();
   const { message, type } = useAppSelector((state) => state.notifications);
   const dispatch = useAppDispatch();
