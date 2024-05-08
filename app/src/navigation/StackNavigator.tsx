@@ -19,12 +19,16 @@ export default function StackNavigator({ navigation }: any) {
       <Stack.Screen
         name={SCREEN_NAMES.LIST_EMPLOYEES_SCREEN_STACK}
         component={ListeEmployeScreenStack}
-        options={{ title: "Liste Employé" }}
+        options={({ navigation }) => ({
+          title: "Liste Employé",
+        })}
       />
       <Stack.Screen
         name={SCREEN_NAMES.MENU_SCREEN_STACK}
         component={MenuScreenStack}
-        options={{ title: "Menu" }}
+        options={({ navigation }) => ({
+          title: "Menu",
+        })}
       />
     </Stack.Navigator>
   );

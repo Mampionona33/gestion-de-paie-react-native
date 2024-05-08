@@ -18,9 +18,9 @@ const DrawerList: DrawerListProps[] = [
   {
     icon: "list",
     label: "Liste Employé",
-    navigateTo: SCREEN_NAMES.LIST_EMPLOYEES_SCREEN,
+    navigateTo: SCREEN_NAMES.LIST_EMPLOYEES_SCREEN_STACK,
   },
-  { icon: "menu", label: "Menu", navigateTo: SCREEN_NAMES.MENU_SCREEN },
+  { icon: "menu", label: "Menu", navigateTo: SCREEN_NAMES.MENU_SCREEN_STACK },
 ];
 
 const DrawerLayout: React.FC<DrawerListProps> = ({
@@ -33,22 +33,40 @@ const DrawerLayout: React.FC<DrawerListProps> = ({
     <DrawerItem
       icon={() => <Icon name={icon!} size={25} />}
       label={label}
-      onPress={() => navigation.navigate(navigateTo)}
+      onPress={() => {
+        navigation.navigate(navigateTo, { screen: navigateTo });
+      }}
     />
   );
 };
 
+const DrawerItems = (props: unknown) => {
+  return DrawerList.map((el, i) => {
+    return (
+      <DrawerLayout
+        key={i}
+        icon={el.icon}
+        label={el.label}
+        navigateTo={el.navigateTo}
+      />
+    );
+  });
+};
+
 const DrawerContent: React.FC<DrawerContentComponentProps> = (props) => {
+  const navigation = useNavigation<DrawerNavigationProp<any>>();
   return (
     <>
-      {DrawerList.map((item, index) => (
-        <DrawerLayout
-          key={index}
-          icon={item.icon}
-          label={item.label}
-          navigateTo={item.navigateTo}
-        />
-      ))}
+      <DrawerItem
+        label="Menu"
+        icon={() => <Icon name="menu" size={25} />}
+        onPress={() => navigation.navigate(SCREEN_NAMES.MENU_SCREEN)}
+      />
+      <DrawerItem
+        label={"Liste Employé"}
+        onPress={() => navigation.navigate(SCREEN_NAMES.LIST_EMPLOYEES_SCREEN)}
+        icon={() => <Icon name="list" size={25} />}
+      />
     </>
   );
 };

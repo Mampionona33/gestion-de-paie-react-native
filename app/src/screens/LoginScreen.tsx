@@ -1,5 +1,5 @@
 import React from "react";
-import { NavigationProp } from "@react-navigation/native";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import {
   Button,
@@ -32,11 +32,12 @@ type LoginScreenProps = {
   navigation: NavigationProp<any>;
 };
 
-export default function LoginScreen({ navigation }: LoginScreenProps) {
+export default function LoginScreen() {
   const [state, setState] = React.useState<ILogin>({ email: "", password: "" });
   const [submit, setSubmit] = React.useState<boolean>(false);
   const { isAuthenticated } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
+  const navigation = useNavigation<NavigationProp<any>>();
 
   React.useEffect(() => {
     if (isAuthenticated) {
