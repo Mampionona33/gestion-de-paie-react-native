@@ -5,10 +5,9 @@ import MenuScreen from "../screens/MenuScreen";
 
 const Tab = createBottomTabNavigator();
 
-export default function TabNavitator() {
+export default function TabNavigator() {
   return (
     <Tab.Navigator
-      initialRouteName="ListEmploye"
       screenOptions={{
         headerShown: false,
       }}
