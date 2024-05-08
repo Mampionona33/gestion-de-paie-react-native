@@ -15,7 +15,9 @@ function AppNavigator() {
   return (
     <NavigationContainer>
       {isAuthenticated ? (
-        <DrawerNavigator />
+        <>
+          <DrawerNavigator />
+        </>
       ) : (
         <Stack.Navigator>
           <Stack.Screen name="Login" component={LoginScreen} />

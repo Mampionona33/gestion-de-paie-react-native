@@ -10,7 +10,7 @@ export default function TabNavitator() {
     <Tab.Navigator
       initialRouteName="ListEmploye"
       screenOptions={{
-        headerShown: true,
+        headerShown: false,
       }}
     >
       <Tab.Screen
