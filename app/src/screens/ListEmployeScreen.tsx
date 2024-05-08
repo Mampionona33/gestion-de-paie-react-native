@@ -18,6 +18,7 @@ import {
 import { DataTable } from "react-native-paper";
 import { useAppDispatch } from "../hooks/useReduxHooks";
 import { setNotification } from "../redux/notification/notificationReducer";
+import { useAnimatedStyle } from "react-native-reanimated";
 
 export default function ListEmployeScreen(): JSX.Element {
   const { data, isFetching, isError, error } = useQuery(
@@ -33,6 +34,12 @@ export default function ListEmployeScreen(): JSX.Element {
   const [itemsPerPage, onItemsPerPageChange] = React.useState(
     numberOfItemsPerPageList[0],
   );
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      display: isKeyboardVisible ? "none" : "flex",
+    };
+  }, []);
 
   React.useEffect(() => {
     setPage(0);

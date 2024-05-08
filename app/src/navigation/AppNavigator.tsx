@@ -1,9 +1,11 @@
-import React from "react";
+import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import LoginScreen from "../screens/LoginScreen";
 import { useAppSelector } from "../hooks/useReduxHooks";
 import TabNavitator from "./TabNavitator";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import DrawerNavigator from "./DrawerNavigator";
 
 const Stack = createStackNavigator();
 
@@ -12,17 +14,13 @@ function AppNavigator() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        {!isAuthenticated ? (
+      {isAuthenticated ? (
+        <DrawerNavigator />
+      ) : (
+        <Stack.Navigator>
           <Stack.Screen name="Login" component={LoginScreen} />
-        ) : (
-          <Stack.Screen
-            name="Tab Navigator"
-            component={TabNavitator}
-            options={{ headerShown: false }}
-          />
-        )}
-      </Stack.Navigator>
+        </Stack.Navigator>
+      )}
     </NavigationContainer>
   );
 }
