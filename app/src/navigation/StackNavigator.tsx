@@ -19,16 +19,18 @@ export default function StackNavigator({ navigation }: any) {
       <Stack.Screen
         name={SCREEN_NAMES.LIST_EMPLOYEES_SCREEN_STACK}
         component={ListeEmployeScreenStack}
-        options={({ navigation }) => ({
-          title: "Liste Employé",
-        })}
+        // options={({ navigation }) => ({
+        //   title: "Liste Employé test",
+        //   headerShown: true,
+        // })}
       />
       <Stack.Screen
         name={SCREEN_NAMES.MENU_SCREEN_STACK}
         component={MenuScreenStack}
-        options={({ navigation }) => ({
-          title: "Menu",
-        })}
+        // options={({ navigation }) => ({
+        //   title: "Menu",
+        //   headerShown: true,
+        // })}
       />
     </Stack.Navigator>
   );

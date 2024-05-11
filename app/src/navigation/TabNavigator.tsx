@@ -10,19 +10,14 @@ export default function TabNavigator() {
   return (
     <Tab.Navigator
       screenOptions={{
-        headerShown: false,
+        headerShown: true,
       }}
     >
       <Tab.Screen
         name={SCREEN_NAMES.LIST_EMPLOYEES_SCREEN}
         component={ListEmployeScreen}
-        options={{ title: "List Employé" }}
       />
-      <Tab.Screen
-        name={SCREEN_NAMES.MENU_SCREEN}
-        component={MenuScreen}
-        options={{ title: "Menu" }}
-      />
+      <Tab.Screen name={SCREEN_NAMES.MENU_SCREEN} component={MenuScreen} />
     </Tab.Navigator>
   );
 }

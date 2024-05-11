@@ -18,9 +18,9 @@ const DrawerList: DrawerListProps[] = [
   {
     icon: "list",
     label: "Liste Employé",
-    navigateTo: SCREEN_NAMES.LIST_EMPLOYEES_SCREEN_STACK,
+    navigateTo: SCREEN_NAMES.LIST_EMPLOYEES_SCREEN,
   },
-  { icon: "menu", label: "Menu", navigateTo: SCREEN_NAMES.MENU_SCREEN_STACK },
+  { icon: "menu", label: "Menu", navigateTo: SCREEN_NAMES.MENU_SCREEN },
 ];
 
 const DrawerLayout: React.FC<DrawerListProps> = ({
@@ -54,19 +54,9 @@ const DrawerItems = (props: unknown) => {
 };
 
 const DrawerContent: React.FC<DrawerContentComponentProps> = (props) => {
-  const navigation = useNavigation<DrawerNavigationProp<any>>();
   return (
     <>
-      <DrawerItem
-        label="Menu"
-        icon={() => <Icon name="menu" size={25} />}
-        onPress={() => navigation.navigate(SCREEN_NAMES.MENU_SCREEN)}
-      />
-      <DrawerItem
-        label={"Liste Employé"}
-        onPress={() => navigation.navigate(SCREEN_NAMES.LIST_EMPLOYEES_SCREEN)}
-        icon={() => <Icon name="list" size={25} />}
-      />
+      <DrawerItems />
     </>
   );
 };

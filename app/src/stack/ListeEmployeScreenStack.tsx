@@ -7,7 +7,7 @@ const ListeEmployeScreenStack = () => {
   return (
     <Stack.Navigator
       initialRouteName="ListEmployeScreen"
-      screenOptions={{ headerShown: false, title: "Liste Employé" }}
+      screenOptions={{ headerShown: true, title: "Liste Employé" }}
     >
       <Stack.Screen name="TabNavigator" component={TabNavigator} />
     </Stack.Navigator>

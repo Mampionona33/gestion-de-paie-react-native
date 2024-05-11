@@ -6,7 +6,7 @@ const MenuScreenStack = () => {
   return (
     <Stack.Navigator
       initialRouteName="MenuScreen"
-      screenOptions={{ headerShown: false, title: "Menu" }}
+      screenOptions={{ headerShown: true, title: "Menu" }}
     >
       <Stack.Screen name="TabNavigator" component={TabNavigator} />
     </Stack.Navigator>
